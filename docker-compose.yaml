@@ -1,0 +1,67 @@
+services:
+  database:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_DB: huddlDB
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - huddl-network
+
+  backend:
+    container_name: spring-boot
+    build:
+      context: ./backend
+    depends_on:
+      - database
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/huddlDB
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    ports:
+      - "8080:8080"
+    networks:
+      - huddl-network
+
+  frontend:
+    container_name: nextjs
+    build:
+      context: ./frontend
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - "backend"
+    ports:
+      - "3000:3000"
+    networks:
+      - huddl-network
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx
+    ports:
+      - "8081:80"
+      - "8443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/certs/:/etc/nginx/certs/:ro
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - huddl-network
+
+volumes:
+  pgdata:
+
+networks:
+  huddl-network:
+    driver: bridge
