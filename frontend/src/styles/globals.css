@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@theme {
+  --default-font-family: "Verdana", "sans-serif";
+  --color-brand: #1ecea2;
+}
+
 html,
 body,
 #__next {

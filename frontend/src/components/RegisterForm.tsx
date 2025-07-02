@@ -22,30 +22,30 @@ export default function LoginForm() {
 
   return (
     <div>
-      <form className="flex flex-col gap-8 mx-auto max-w-[480px]">
+      <form className="flex flex-col gap-8 mx-auto w-full">
         <input
-          className="bg-white px-4 py-2 border-2"
+          className="bg-white px-8 py-4 border-1 border-slate-400 rounded-md shadow-sm"
           type="text"
           placeholder="@username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
-          className="bg-white px-4 py-2 border-2"
+          className="bg-white px-8 py-4 border-1 border-slate-400 rounded-md shadow-sm"
           type="password"
           placeholder="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <button
-          className="bg-white px-4 py-2 border-2"
+          className="bg-brand text-white font-bold px-8 py-4 border-1 border-slate-400 rounded-md shadow-sm"
           type="button"
           onClick={() => registerUser()}
         >
           Register
         </button>
       </form>
-      <small className="text-slate-600">
+      <small className="text-slate-600 pt-4 inline-block w-full text-center">
         here to{" "}
         <span
           className="text-brand cursor-pointer"
