@@ -17,7 +17,7 @@ export default function LoginForm() {
 
     //return JWT token
     console.log("response was:", res);
-    return res.json();
+    return res;
   };
 
   return (
