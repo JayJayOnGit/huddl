@@ -1,5 +1,6 @@
 import { Router, useRouter } from "next/router";
 import { useState } from "react";
+import axios from "axios";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -7,17 +8,20 @@ export default function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const loginUser = async () => {
+  const loginUser = () => {
     console.log(username, password);
-    const res = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
-    });
 
-    //return JWT token
-    console.log("response was:", res);
-    return res;
+    axios
+      .post("/api/auth/login", { username, password })
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        router.push("/");
+
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.error(err.response);
+      });
   };
 
   return (

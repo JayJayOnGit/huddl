@@ -9,7 +9,9 @@ export default function AuthRequired({
   const router = useRouter();
 
   useEffect(() => {
-    if (true) {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
       router.push("/auth/login");
     }
   }, []);
