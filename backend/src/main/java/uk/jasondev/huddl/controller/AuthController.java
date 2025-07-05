@@ -49,12 +49,8 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest req) {
-        Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(req.username, req.password));
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        return ResponseEntity.ok(new AuthResponse("ermm?"));
+        return ResponseEntity.ok(new AuthResponse("token"));
     }
 
 }
