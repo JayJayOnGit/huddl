@@ -1,8 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --default-font-family: "Verdana", "sans-serif";
+  --default-font-family: "Tahoma", "sans-serif";
   --color-brand: #1ecea2;
+  --color-brand-dark: #179e7e;
+}
+
+html {
+  color: #232323;
+  font-weight: 500;
 }
 
 html,
