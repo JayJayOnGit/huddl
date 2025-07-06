@@ -21,14 +21,14 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody AuthRequest req) {
-        String jwt = userService.registerUser(req.username, req.password);
+        String jwt = userService.registerUser(req);
 
         return ResponseEntity.ok(new AuthResponse(jwt));
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody AuthRequest req) {
-        String jwt = userService.loginUser(req.username, req.password);
+        String jwt = userService.loginUser(req);
 
         return ResponseEntity.ok(new AuthResponse(jwt));
     }

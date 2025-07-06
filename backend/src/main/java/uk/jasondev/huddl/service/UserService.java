@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import uk.jasondev.huddl.dto.AuthRequest;
 import uk.jasondev.huddl.model.User;
 import uk.jasondev.huddl.repo.UserRepository;
 
@@ -21,28 +22,28 @@ public class UserService {
     @Autowired
     private JWTService jwtService;
 
-    public String registerUser(String username, String password) {
-        if (userRepository.existsByUsername(username)) {
+    public String registerUser(AuthRequest req) {
+        if (userRepository.existsByUsername(req.username)) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "username already exists");
         }
 
         User user = new User();
 
-        user.setUsername(username);
-        user.setPassword(passwordEncoder.encode(password));
+        user.setUsername(req.username);
+        user.setPassword(passwordEncoder.encode(req.password));
         userRepository.save(user);
 
-        return jwtService.generateToken(username);
+        return jwtService.generateToken(req.username);
     }
 
-    public String loginUser(String username, String password) {
-        User user = userRepository.findByUsername(username)
+    public String loginUser(AuthRequest req) {
+        User user = userRepository.findByUsername(req.username)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "username not found"));
 
-        if (!passwordEncoder.matches(password, user.getPassword())) {
+        if (!passwordEncoder.matches(req.password, user.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "invalid password");
         }
 
-        return jwtService.generateToken(username);
+        return jwtService.generateToken(req.username);
     }
 }

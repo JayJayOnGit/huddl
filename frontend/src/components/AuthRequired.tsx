@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 export default function AuthRequired({
   children,
@@ -14,6 +15,8 @@ export default function AuthRequired({
     if (!token) {
       router.push("/auth/login");
     }
+
+    axios.defaults.headers.common = { Authorization: "Bearer " + token };
   }, []);
 
   return <>{children}</>;

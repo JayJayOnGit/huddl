@@ -1,14 +1,25 @@
 import AuthRequired from "@/components/AuthRequired";
+import Header from "@/components/Header";
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const router = useRouter();
+
   return (
     <AuthRequired>
       <div className="w-full h-full">
-        <header className="static flex w-full h-12 px-4 items-center border-b-1 border-neutral-200">
-          <h1 className="text-2xl font-bold text-brand">HUDDL</h1>
-        </header>
+        <Header />
         <div className="h-full max-w-[1280px] px-4 mx-auto">
-          <h2 className="text-xl my-6">All Your Holidays</h2>
+          <div className="flex justify-between my-8 items-center">
+            <h2 className="text-xl">All Your Holidays</h2>
+            <button
+              className="text-md py-1 px-2 bg-brand text-white border-1 rounded-sm border-brand-dark shadow-sm"
+              type="button"
+              onClick={() => router.push("/new")}
+            >
+              New Holiday
+            </button>
+          </div>
           <div className="grid grid-cols-2 max-xl:grid-cols-1 gap-8">
             <div className="flex flex-col p-3 rounded-md border-1 border-neutral-200 shadow-xs hover:border-neutral-400 hover:shadow-md transition-all">
               <div className="flex justify-between">
