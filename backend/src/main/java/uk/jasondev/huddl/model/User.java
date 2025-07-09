@@ -1,10 +1,14 @@
 package uk.jasondev.huddl.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,8 +20,11 @@ public class User {
 
     @Column(unique = true)
     private String username;
-    
+
     private String password;
+
+    @ManyToMany(mappedBy = "users")
+    private Set<Group> groups = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -37,5 +44,9 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Group> getGroups() {
+        return groups;
     }
 }

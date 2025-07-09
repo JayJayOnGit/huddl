@@ -5,10 +5,12 @@ export default function Header() {
 
   return (
     <header
-      className="static flex w-full h-12 px-4 items-center border-b-1 border-neutral-200 cursor-pointer"
+      className="static flex w-full h-12 px-4 items-center border-b-1 border-neutral-200 shadow-2xs"
       onClick={() => router.push("/")}
     >
-      <h1 className="text-2xl font-bold text-brand">HUDDL</h1>
+      <div className="w-full max-w-[1440px] mx-auto">
+        <h1 className="text-2xl font-bold text-brand cursor-pointer">HUDDL</h1>
+      </div>
     </header>
   );
 }
