@@ -9,7 +9,7 @@ export default function Header() {
       onClick={() => router.push("/")}
     >
       <div className="w-full max-w-[1440px] mx-auto">
-        <h1 className="text-2xl font-bold text-brand cursor-pointer">HUDDL</h1>
+        <h1 className="text-2xl font-black text-brand cursor-pointer">HUDDL</h1>
       </div>
     </header>
   );

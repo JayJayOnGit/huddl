@@ -28,19 +28,19 @@ export default function LoginForm() {
     <div>
       <form className="flex flex-col gap-4 mx-auto w-full">
         <input
-          className="bg-white px-8 py-4 border-1 border-neutral-200 rounded-md shadow-xs"
+          className="bg-white px-4 py-2 border-1 border-neutral-200 rounded-sm shadow-xs"
           type="text"
           placeholder="@username"
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
-          className="bg-white px-8 py-4 border-1 border-neutral-200 rounded-md shadow-xs"
+          className="bg-white px-4 py-2 border-1 border-neutral-200 rounded-sm shadow-xs"
           type="password"
           placeholder="password"
           onChange={(e) => setPassword(e.target.value)}
         />
         <button
-          className="bg-brand text-white font-bold px-8 py-4 border-1 border-brand-dark rounded-md shadow-xs hover:shadow-md hover:bg-brand-dark"
+          className="bg-brand text-white font-bold px-4 py-2 border-1 border-brand-dark rounded-sm shadow-xs hover:shadow-md hover:bg-brand-dark"
           type="button"
           onClick={() => loginUser()}
         >
