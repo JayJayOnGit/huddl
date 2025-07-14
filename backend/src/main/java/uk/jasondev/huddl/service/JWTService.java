@@ -17,6 +17,8 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JWTService {
 
+    private final long JWT_DURATION = 1000 * 60 * 60 * 24 * 7;
+
     @Value("${jwt.secret}")
     private String jwtSecret;
 
@@ -29,7 +31,7 @@ public class JWTService {
                 .add(claims)
                 .subject(username)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 60 * 60 * 24 * 7))
+                .expiration(new Date(System.currentTimeMillis() + JWT_DURATION))
                 .and()
                 .signWith(getKey())
                 .compact();
