@@ -1,5 +1,6 @@
 package uk.jasondev.huddl.service;
 
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import uk.jasondev.huddl.dto.GroupRequest;
+import uk.jasondev.huddl.dto.PollRequest;
 import uk.jasondev.huddl.model.Group;
 import uk.jasondev.huddl.model.Option;
 import uk.jasondev.huddl.model.Poll;
@@ -41,14 +43,23 @@ public class GroupService {
 
         group.getUsers().add(user);
 
-        for (Poll poll : group.getPolls()) {
-            poll.setGroup(group);
+        for (PollRequest pollRequest : req.polls) {
 
-            for (Option option : poll.getOptions()) {
+            System.out.println(pollRequest.question);
+
+            Poll poll = new Poll();
+            poll.setQuestion(pollRequest.question);
+            poll.setIsMultipleChoice(pollRequest.isMultipleChoice);
+
+            for (String optionRequest : pollRequest.options) {
+                Option option = new Option();
+                option.setText(optionRequest);
+
                 option.setPoll(poll);
                 poll.getOptions().add(option);
             }
 
+            poll.setGroup(group);
             group.getPolls().add(poll);
         }
 

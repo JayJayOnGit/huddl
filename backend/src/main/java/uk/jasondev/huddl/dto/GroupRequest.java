@@ -10,5 +10,5 @@ public class GroupRequest {
     public boolean budgetTracker;
     public LocalDate startDate;
     public LocalDate endDate;
-    public List<Poll> polls;
+    public List<PollRequest> polls;
 }
