@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 
 export default function AuthRequired({
@@ -9,10 +10,22 @@ export default function AuthRequired({
 }) {
   const router = useRouter();
 
+  const isTokenExpired = (token: string) => {
+    try {
+      const decoded = jwtDecode(token);
+      if (!decoded.exp) return true;
+      const now = Date.now() / 1000;
+
+      return decoded.exp < now;
+    } catch (error) {
+      return true;
+    }
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    if (!token) {
+    if (!token || isTokenExpired(token)) {
       router.push("/auth/login");
     }
 
