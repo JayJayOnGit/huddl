@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-  --default-font-family: "Tahoma", "sans-serif";
   --color-brand: #1ecea2;
   --color-brand-dark: #179e7e;
 
