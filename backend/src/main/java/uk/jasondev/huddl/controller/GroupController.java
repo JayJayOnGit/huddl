@@ -19,6 +19,7 @@ public class GroupController {
 
     @PostMapping
     public ResponseEntity<?> createGroup(@RequestBody GroupRequest req) {
+        System.out.print(req);
 
         groupService.createGroup(req);
         return ResponseEntity.ok("no way it worked");

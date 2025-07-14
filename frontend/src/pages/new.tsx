@@ -71,12 +71,7 @@ export default function CreateGroup() {
     console.log(payload);
 
     axios
-      .post("/api/groups", {
-        title,
-        description,
-        availabiltiyTracker,
-        budgetTracker,
-      })
+      .post("/api/groups", payload)
       .then((res) => {
         console.log(res.data);
       })
