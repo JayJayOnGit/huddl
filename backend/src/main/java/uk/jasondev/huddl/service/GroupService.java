@@ -1,5 +1,9 @@
 package uk.jasondev.huddl.service;
 
+import java.nio.ByteBuffer;
+import java.util.Base64;
+import java.util.UUID;
+
 import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,7 +32,9 @@ public class GroupService {
     @Transactional
     public void createGroup(GroupRequest req) {
         Group group = new Group();
+        String inviteToken = generateInviteToken();
 
+        group.setInviteToken(inviteToken);
         group.setTitle(req.title);
         group.setDescription(req.description);
         group.setActivityTracker(req.availabiltiyTracker);
@@ -64,5 +70,14 @@ public class GroupService {
         }
 
         groupRepository.save(group);
+    }
+
+    public String generateInviteToken() {
+        UUID uuid = UUID.randomUUID();
+        ByteBuffer buffer = ByteBuffer.wrap(new byte[16]);
+        buffer.putLong(uuid.getMostSignificantBits());
+        buffer.putLong(uuid.getLeastSignificantBits());
+
+        return Base64.getUrlEncoder().withoutPadding().encodeToString(buffer.array());
     }
 }

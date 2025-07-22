@@ -110,7 +110,7 @@ export default function CreateGroup() {
   return (
     <AuthRequired>
       <div className="w-full h-full">
-        <Header />
+        <Header states={[]} onStateChance={() => {}} />
         <div className="h-full max-w-[720px] px-4 mx-auto">
           <div className="flex flex-col mt-8 mb-4 border-1 border-neutral-300 rounded-md shadow-2xs">
             <input
