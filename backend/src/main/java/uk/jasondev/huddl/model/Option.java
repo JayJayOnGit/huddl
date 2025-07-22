@@ -23,7 +23,7 @@ public class Option {
     @JoinColumn(name = "poll_id")
     private Poll poll;
 
-    public String getTest() {
+    public String getText() {
         return text;
     }
 

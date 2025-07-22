@@ -36,7 +36,7 @@ public class Poll {
     private List<Option> options = new ArrayList<>();
 
     @OneToMany(mappedBy = "poll", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<PollResponse> responses = new HashSet<>();
+    private Set<PollAnswer> responses = new HashSet<>();
 
     public String getQuestion() {
         return question;
@@ -66,7 +66,7 @@ public class Poll {
         return options;
     }
 
-    public Set<PollResponse> getResponses() {
+    public Set<PollAnswer> getResponses() {
         return responses;
     }
 }

@@ -42,6 +42,11 @@ body,
   margin: 0;
 }
 
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--color-brand-dark);
+}
+
 input:focus,
 select:focus,
 textarea:focus {
