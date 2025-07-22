@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import PollOption from "./PollOption";
+import { useState } from "react";
+import PollOption from "@/components/PollOption";
 import { Poll } from "@/types";
 
 type PollBuilderProps = {

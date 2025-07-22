@@ -1,5 +1,3 @@
-import close from "/icons/close.png";
-
 type OptionProps = {
   index: number;
   value: string;

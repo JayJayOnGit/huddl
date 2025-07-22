@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import FormResults from "@/components/HolidayView/FormResults";
 import Plan from "@/components/HolidayView/Plan";
-import axios from "axios";
 import AuthRequired from "@/components/AuthRequired";
 
 export default function Group() {

@@ -1,6 +1,6 @@
 import AuthRequired from "@/components/AuthRequired";
 import Header from "@/components/Header";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import PollBuilder from "@/components/PollBuilder";
 import { Poll } from "@/types";
