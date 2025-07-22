@@ -32,7 +32,6 @@ export default function Group() {
 
   return (
     <AuthRequired>
-      {" "}
       <h1>
         <Header
           states={["Form", "Results", "Plan"]}

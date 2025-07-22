@@ -77,6 +77,18 @@ public class GroupService {
         groupRepository.save(group);
     }
 
+    public void addUserToGroup(String inviteToken) {
+        Group group = groupRepository.findByInviteToken(inviteToken)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "invite token not found"));
+
+        User user = getCurrentUser();
+
+        if (!group.getUsers().contains(user)) {
+            group.getUsers().add(user);
+            groupRepository.save(group);
+        }
+    }
+
     public GroupInfoResponse getGroupInfo(String inviteToken) {
         Group group = groupRepository.findByInviteToken(inviteToken)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "invite token not found"));

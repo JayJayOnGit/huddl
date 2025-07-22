@@ -6,6 +6,7 @@ import PollInput from "@/components/HolidayView/PollInput";
 import axios from "axios";
 import { GroupInfo } from "@/types";
 import router from "next/router";
+import InviteLink from "@/components/InviteLink";
 
 type FormProps = {
   inviteToken: string;
@@ -56,6 +57,7 @@ export default function Form({ inviteToken }: FormProps) {
     <div className="h-full max-w-[720px] px-4 pb-4 mx-auto">
       <div className="flex justify-between my-4 items-center">
         <h2 className="text-xl font-bold">Holiday Form</h2>
+        <InviteLink token={inviteToken} />
       </div>
       <div className="flex flex-col gap-4 w-full">
         <h2 className="p-2 border-1 border-neutral-300 text-2xl font-bold rounded-sm shadow-xs">
