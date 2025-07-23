@@ -1,6 +1,6 @@
 ## Project Overview
 
-huddl is a collaborative holiday planner, where users can suggest and vote on their favorite activities. Prep and plan with the activity tracker and budget planner.
+huddl is a collaborative group planner which allows users to organise and track holidays; suggest and save local activites and tally votes to determine group favourites.
 
 ## Tech Stack
 
@@ -8,7 +8,7 @@ huddl is a collaborative holiday planner, where users can suggest and vote on th
 
 - [Next.js](https://nextjs.org/) – React framework for SSR, routing, and optimized builds
 - [TypeScript](https://www.typescriptlang.org/) – Static typing for maintainable code
-- [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS framework (if used)
+- [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS framework
 
 **Backend:**
 
