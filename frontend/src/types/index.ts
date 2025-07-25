@@ -4,7 +4,7 @@ export type Poll = {
   options: string[];
 };
 
-export type GroupInfo = {
+export type HolidayPoll = {
   title: string;
   description: string;
   availabiltiyTracker: boolean;
@@ -12,4 +12,13 @@ export type GroupInfo = {
   startDate: Date;
   endDate: Date;
   polls: Poll[];
+};
+
+export type Preview = {
+  host: string;
+  title: string;
+  description: string;
+  startDate?: Date;
+  endDate?: Date;
+  token: string;
 };

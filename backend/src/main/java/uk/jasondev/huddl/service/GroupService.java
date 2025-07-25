@@ -4,6 +4,7 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -15,7 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import jakarta.transaction.Transactional;
-import uk.jasondev.huddl.dto.GroupInfoResponse;
+import uk.jasondev.huddl.dto.GroupPollResponse;
+import uk.jasondev.huddl.dto.GroupPreviewResponse;
 import uk.jasondev.huddl.dto.GroupRequest;
 import uk.jasondev.huddl.dto.PollRequest;
 import uk.jasondev.huddl.dto.PollResponse;
@@ -35,6 +37,19 @@ public class GroupService {
     @Autowired
     private UserRepository userRepository;
 
+    public List<GroupPreviewResponse> getUsersGroup() {
+        User user = getCurrentUser();
+        Set<Group> groups = user.getGroups();
+        List<GroupPreviewResponse> previews = new ArrayList<>();
+
+        for (Group group : groups) {
+            previews.add(new GroupPreviewResponse(group.getHost().getUsername(), group.getTitle(),
+                    group.getDescription(), group.getStartDate(), group.getEndDate(), group.getInviteToken()));
+        }
+
+        return previews;
+    }
+
     @Transactional
     public void createGroup(GroupRequest req) {
         Group group = new Group();
@@ -50,6 +65,7 @@ public class GroupService {
 
         User user = getCurrentUser();
 
+        group.setHost(user);
         group.getUsers().add(user);
 
         for (PollRequest pollRequest : req.polls) {
@@ -87,7 +103,7 @@ public class GroupService {
         }
     }
 
-    public GroupInfoResponse getGroupInfo(String inviteToken) {
+    public GroupPollResponse getGroupInfo(String inviteToken) {
         Group group = groupRepository.findByInviteToken(inviteToken)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "invite token not found"));
 
@@ -108,7 +124,8 @@ public class GroupService {
             pollResponses.add(new PollResponse(poll.getQuestion(), poll.getIsMultipleChoice(), options));
         }
 
-        return new GroupInfoResponse(group.getTitle(), group.getDescription(), group.getActivityTracker(),
+        return new GroupPollResponse(group.getHost().getUsername(), group.getTitle(), group.getDescription(),
+                group.getActivityTracker(),
                 group.getBudgetTracker(), group.getStartDate(), group.getEndDate(), pollResponses);
     }
 

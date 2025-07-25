@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type HeaderProps = {
   states: string[];
@@ -8,13 +8,18 @@ type HeaderProps = {
 
 export default function Header({ states, onStateChance }: HeaderProps) {
   const router = useRouter();
-
+  const ref = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    document.addEventListener("scroll", (e) => {
+      setMenuOpen(false);
+    });
+  }, []);
 
   return (
     <div>
-      {" "}
-      <header className="static flex w-full h-12 px-4 items-center border-b-1 border-neutral-200 shadow-2xs">
+      <header className="relative z-10 flex w-full h-12 px-4 items-center border-b-1 bg-white border-neutral-200 shadow-xs">
         <div className="flex justify-between w-full max-w-[1440px] mx-auto">
           <div className="flex gap-12 items-center">
             <h1
@@ -33,16 +38,27 @@ export default function Header({ states, onStateChance }: HeaderProps) {
               </h2>
             ))}
           </div>
-          <img
-            className="h-6 my-auto opacity-50 min-md:hidden hover:opacity-100 cursor cursor-pointer"
-            src="/icons/hamburger.png"
-            onClick={() => {
-              setMenuOpen(!menuOpen);
-            }}
-          />
+          <div className="flex gap-4">
+            <img className="h-6 my-auto" src="/icons/user.png" />
+            <img
+              className={
+                "h-6 my-auto opacity-50 min-md:hidden hover:opacity-100 cursor cursor-pointer " +
+                (states.length == 0 && "hidden")
+              }
+              src="/icons/hamburger.png"
+              onClick={() => {
+                setMenuOpen(!menuOpen);
+              }}
+            />
+          </div>
         </div>
       </header>
-      <div className={"flex flex-col min-md:hidden " + (!menuOpen && "hidden")}>
+      <div
+        className={
+          "absolute w-full bg-white shadow-sm flex flex-col min-md:hidden " +
+          (menuOpen ? "translate-y-0" : "opacity-0 translate-y-[-100%]")
+        }
+      >
         {states.map((state, index) => (
           <h2
             key={index}

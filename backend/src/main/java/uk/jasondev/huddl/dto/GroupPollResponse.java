@@ -3,7 +3,8 @@ package uk.jasondev.huddl.dto;
 import java.time.LocalDate;
 import java.util.List;
 
-public class GroupInfoResponse {
+public class GroupPollResponse {
+    private String host;
     private String title;
     private String description;
     private boolean availabiltiyTracker;
@@ -12,7 +13,8 @@ public class GroupInfoResponse {
     private LocalDate endDate;
     private List<PollResponse> polls;
 
-    public GroupInfoResponse(String title, String description, boolean availabiltiyTracker, boolean budgetTracker,
+    public GroupPollResponse(String host, String title, String description, boolean availabiltiyTracker,
+            boolean budgetTracker,
             LocalDate startDate, LocalDate endDate, List<PollResponse> polls) {
         this.title = title;
         this.description = description;
@@ -21,6 +23,10 @@ public class GroupInfoResponse {
         this.startDate = startDate;
         this.endDate = endDate;
         this.polls = polls;
+    }
+
+    public String getHost() {
+        return host;
     }
 
     public String getTitle() {

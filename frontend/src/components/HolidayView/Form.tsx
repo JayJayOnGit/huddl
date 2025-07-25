@@ -4,7 +4,7 @@ import "react-day-picker/style.css";
 import BudgetSlider from "@/components/BudgetSlider";
 import PollInput from "@/components/HolidayView/PollInput";
 import axios from "axios";
-import { GroupInfo } from "@/types";
+import { HolidayPoll } from "@/types";
 import router from "next/router";
 import InviteLink from "@/components/InviteLink";
 
@@ -21,7 +21,7 @@ export default function Form({ inviteToken }: FormProps) {
   // set budget slider to half
   const [budget, setBudget] = useState(MAXIMUM_INCRAMENT_MULTIPLE * 0.5);
 
-  const [groupInfo, setGroupInfo] = useState<GroupInfo>();
+  const [holidayPoll, setHolidayPoll] = useState<HolidayPoll>();
 
   const handleSliderChange = (value: number) => {
     setBudget(value);
@@ -35,9 +35,9 @@ export default function Form({ inviteToken }: FormProps) {
   useEffect(() => {
     if (inviteToken) {
       axios
-        .get("/api/groups/info/" + inviteToken)
+        .get("/api/groups/" + inviteToken)
         .then((res) => {
-          setGroupInfo(res.data);
+          setHolidayPoll(res.data);
         })
         .catch((err) => {
           router.push("/");
@@ -61,16 +61,16 @@ export default function Form({ inviteToken }: FormProps) {
       </div>
       <div className="flex flex-col gap-4 w-full">
         <h2 className="p-2 border-1 border-neutral-300 text-2xl font-bold rounded-sm shadow-xs">
-          {groupInfo?.title}
+          {holidayPoll?.title}
         </h2>
 
         <h3 className="p-2 border-1 border-neutral-300 rounded-sm shadow-xs">
-          {groupInfo?.description}
+          {holidayPoll?.description}
         </h3>
         <div
           className={
             "p-2 border-1 border-neutral-300 rounded-sm shadow-xs" +
-            (!groupInfo?.availabiltiyTracker && " hidden")
+            (!holidayPoll?.availabiltiyTracker && " hidden")
           }
         >
           <DayPicker
@@ -83,14 +83,14 @@ export default function Form({ inviteToken }: FormProps) {
         </div>
 
         <BudgetSlider
-          isActive={!groupInfo?.budgetTracker}
+          isActive={!holidayPoll?.budgetTracker}
           value={budget}
           increment={BUDGET_INCREMENT}
           maxIncMultiple={MAXIMUM_INCRAMENT_MULTIPLE}
           onSlide={handleSliderChange}
         />
 
-        {groupInfo?.polls.map((poll, index) => (
+        {holidayPoll?.polls.map((poll, index) => (
           <PollInput key={index} poll={poll} />
         ))}
       </div>

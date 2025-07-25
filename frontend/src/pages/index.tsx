@@ -1,9 +1,27 @@
 import AuthRequired from "@/components/AuthRequired";
 import Header from "@/components/Header";
+import HolidayPreview from "@/components/HolidayPreview";
+import { Preview } from "@/types";
+import axios from "axios";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const router = useRouter();
+
+  const [holidayPreviews, setHolidayPreviews] = useState<Preview[]>([]);
+
+  useEffect(() => {
+    axios
+      .get("/api/groups")
+      .then((res) => {
+        setHolidayPreviews(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        router.push("/");
+      });
+  }, []);
 
   return (
     <AuthRequired>
@@ -20,23 +38,18 @@ export default function Home() {
               New Holiday
             </button>
           </div>
-          <div className="grid grid-cols-2 max-xl:grid-cols-1 gap-8">
-            <div className="flex flex-col p-3 rounded-sm border-1 border-neutral-200 shadow-xs hover:border-neutral-400 hover:shadow-md transition-all">
-              <div className="flex justify-between">
-                <h3 className="text-xl">Costa Blanca '25</h3>
-                <small className="w-min py-1 px-2 border-1 bg-pending border-pending-dark text-pending-dark rounded-2xl">
-                  Pending
-                </small>
-              </div>
-              <div className="flex gap-x-2 pb-2">
-                <p>Calpe, Spain</p>
-                <p>|</p>
-                <p className="text-neutral-600">Sep 29 - Oct 05</p>
-              </div>
-              <small className="text-right text-neutral-600">
-                Created by Jason
-              </small>
-            </div>
+          <div className="grid grid-cols-2 max-xl:grid-cols-1 gap-4">
+            {holidayPreviews.map((preview, index) => (
+              <HolidayPreview
+                key={index}
+                host={preview.host}
+                title={preview.title}
+                description={preview.description}
+                startDate={preview.startDate}
+                endDate={preview.endDate}
+                token={preview.token}
+              />
+            ))}
           </div>
         </div>
       </div>

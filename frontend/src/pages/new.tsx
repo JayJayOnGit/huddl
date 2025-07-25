@@ -30,7 +30,6 @@ export default function CreateGroup() {
 
   const handleRemovePoll = (index: number) => {
     const updatedPolls = polls.filter((_, i) => i !== index);
-    console.log(updatedPolls);
     setPolls(updatedPolls);
   };
 
@@ -67,8 +66,6 @@ export default function CreateGroup() {
       endDate,
       polls: cleanedPolls,
     };
-
-    console.log(payload);
 
     axios
       .post("/api/groups", payload)

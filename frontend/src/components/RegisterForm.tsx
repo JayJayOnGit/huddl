@@ -9,15 +9,11 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
 
   const registerUser = () => {
-    console.log(username, password);
-
     axios
       .post("/api/auth/register", { username, password })
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         router.push("/");
-
-        console.log(res.data);
       })
       .catch((err) => {
         console.error(err.response);

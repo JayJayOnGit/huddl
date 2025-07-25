@@ -15,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -27,6 +28,10 @@ public class Group {
 
     @Column(unique = true, nullable = false)
     private String inviteToken;
+
+    @ManyToOne
+    @JoinColumn(name = "host_id")
+    private User host;
 
     @Column(nullable = false)
     private String title;
@@ -56,6 +61,14 @@ public class Group {
 
     public void setInviteToken(String inviteToken) {
         this.inviteToken = inviteToken;
+    }
+
+    public User getHost() {
+        return host;
+    }
+
+    public void setHost(User host) {
+        this.host = host;
     }
 
     public String getTitle() {
