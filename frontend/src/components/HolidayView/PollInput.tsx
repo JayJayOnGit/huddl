@@ -2,7 +2,7 @@ import { Poll } from "@/types";
 
 export default function PollInput({ poll }: { poll: Poll }) {
   return (
-    <form className="flex flex-col gap-4 px-2 py-4 border-1 border-neutral-300 rounded-sm shadow-xs">
+    <form className="flex flex-col p-4 gap-4 border-1 border-neutral-300 rounded-sm shadow-xs">
       <h2 className="text-xl">{poll.question}</h2>
 
       {poll.options.map((option, index) => (

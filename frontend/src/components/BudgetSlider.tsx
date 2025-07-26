@@ -16,7 +16,7 @@ export default function BudgetSlider({
   return (
     <div
       className={
-        "px-2 py-4 border-1 border-neutral-300 rounded-sm shadow-xs" +
+        "p-4 border-1 border-neutral-300 rounded-sm shadow-xs" +
         (isActive && " hidden")
       }
     >

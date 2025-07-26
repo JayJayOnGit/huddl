@@ -60,13 +60,15 @@ export default function Form({ inviteToken }: FormProps) {
         <InviteLink token={inviteToken} />
       </div>
       <div className="flex flex-col gap-4 w-full">
-        <h2 className="p-2 border-1 border-neutral-300 text-2xl font-bold rounded-sm shadow-xs">
-          {holidayPoll?.title}
-        </h2>
+        <div className="border-1 border-neutral-300 rounded-sm shadow-xs">
+          <h2 className="p-4 border-b-1 border-neutral-300 text-2xl">
+            {holidayPoll?.title}
+          </h2>
 
-        <h3 className="p-2 border-1 border-neutral-300 rounded-sm shadow-xs">
-          {holidayPoll?.description}
-        </h3>
+          <h3 className={"p-4 " + (!holidayPoll && "hidden")}>
+            {holidayPoll?.description}
+          </h3>
+        </div>
         <div
           className={
             "p-2 border-1 border-neutral-300 rounded-sm shadow-xs" +
@@ -93,6 +95,14 @@ export default function Form({ inviteToken }: FormProps) {
         {holidayPoll?.polls.map((poll, index) => (
           <PollInput key={index} poll={poll} />
         ))}
+
+        <button
+          className="text-md py-1 px-2 bg-brand text-white border-1 rounded-sm border-brand-dark shadow-sm"
+          type="button"
+          onClick={() => {}}
+        >
+          Submit
+        </button>
       </div>
     </div>
   );
