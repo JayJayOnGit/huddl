@@ -55,6 +55,7 @@ textarea:focus {
 
 [type="text"]:focus,
 [type="date"]:focus,
+[type="password"]:focus,
 textarea:focus {
   border-bottom: 1px solid var(--color-brand);
 }

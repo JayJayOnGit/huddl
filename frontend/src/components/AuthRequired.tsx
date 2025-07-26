@@ -27,9 +27,9 @@ export default function AuthRequired({
 
     if (!token || isTokenExpired(token)) {
       router.push("/auth/login");
+    } else {
+      axios.defaults.headers.common = { Authorization: "Bearer " + token };
     }
-
-    axios.defaults.headers.common = { Authorization: "Bearer " + token };
   }, []);
 
   return <>{children}</>;
