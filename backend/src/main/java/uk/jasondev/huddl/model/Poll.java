@@ -36,7 +36,11 @@ public class Poll {
     private List<Option> options = new ArrayList<>();
 
     @OneToMany(mappedBy = "poll", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<PollAnswer> responses = new HashSet<>();
+    private Set<PollSubmission> submissions = new HashSet<>();
+
+    public Long getId() {
+        return id;
+    }
 
     public String getQuestion() {
         return question;
@@ -66,7 +70,7 @@ public class Poll {
         return options;
     }
 
-    public Set<PollAnswer> getResponses() {
-        return responses;
+    public Set<PollSubmission> getSubmissions() {
+        return submissions;
     }
 }

@@ -7,18 +7,18 @@ public class GroupPollResponse {
     private String host;
     private String title;
     private String description;
-    private boolean availabiltiyTracker;
+    private boolean availabilityTracker;
     private boolean budgetTracker;
     private LocalDate startDate;
     private LocalDate endDate;
     private List<PollResponse> polls;
 
-    public GroupPollResponse(String host, String title, String description, boolean availabiltiyTracker,
+    public GroupPollResponse(String host, String title, String description, boolean availabilityTracker,
             boolean budgetTracker,
             LocalDate startDate, LocalDate endDate, List<PollResponse> polls) {
         this.title = title;
         this.description = description;
-        this.availabiltiyTracker = availabiltiyTracker;
+        this.availabilityTracker = availabilityTracker;
         this.budgetTracker = budgetTracker;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -37,8 +37,8 @@ public class GroupPollResponse {
         return description;
     }
 
-    public boolean isAvailabiltiyTracker() {
-        return availabiltiyTracker;
+    public boolean isAvailabilityTracker() {
+        return availabilityTracker;
     }
 
     public boolean isBudgetTracker() {

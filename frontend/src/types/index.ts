@@ -4,14 +4,20 @@ export type Poll = {
   options: string[];
 };
 
-export type HolidayPoll = {
+export type FormPoll = {
+  question: string;
+  isMultipleChoice: boolean;
+  options: { [key: number]: string };
+};
+
+export type HolidayForm = {
   title: string;
   description: string;
-  availabiltiyTracker: boolean;
+  availabilityTracker: boolean;
   budgetTracker: boolean;
   startDate: Date;
   endDate: Date;
-  polls: Poll[];
+  polls: FormPoll[];
 };
 
 export type Preview = {

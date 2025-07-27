@@ -23,6 +23,10 @@ public class Option {
     @JoinColumn(name = "poll_id")
     private Poll poll;
 
+    public Long getId() {
+        return this.id;
+    }
+
     public String getText() {
         return text;
     }

@@ -55,6 +55,10 @@ public class Group {
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Poll> polls = new ArrayList<>();
 
+    public Long getId() {
+        return id;
+    }
+
     public String getInviteToken() {
         return inviteToken;
     }

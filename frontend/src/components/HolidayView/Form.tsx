@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { DayPicker } from "react-day-picker";
+import { DayEventHandler, DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
 import BudgetSlider from "@/components/BudgetSlider";
 import PollInput from "@/components/HolidayView/PollInput";
 import axios from "axios";
-import { HolidayPoll } from "@/types";
+import { HolidayForm } from "@/types";
 import router from "next/router";
 import InviteLink from "@/components/InviteLink";
 
@@ -19,12 +19,47 @@ export default function Form({ inviteToken }: FormProps) {
   const [monthDisplay, setMonthDisplay] = useState(0);
 
   // set budget slider to half
+  const [holidayForm, setHolidayForm] = useState<HolidayForm>();
+  const [availability, setAvailability] = useState<Date[] | undefined>([]);
   const [budget, setBudget] = useState(MAXIMUM_INCRAMENT_MULTIPLE * 0.5);
-
-  const [holidayPoll, setHolidayPoll] = useState<HolidayPoll>();
+  const [choices, setChoices] = useState<number[]>([]);
 
   const handleSliderChange = (value: number) => {
     setBudget(value);
+  };
+
+  const handlePollUpdate = (selected: number[], oldSelected: number[]) => {
+    // remove previous selected
+    const filtered = [...choices].filter((id) => !oldSelected.includes(id));
+
+    // add new options
+    const newChoices = [...filtered, ...selected];
+
+    setChoices(newChoices);
+  };
+
+  const handleDateUpdate = (dates: Date[] | undefined) => {
+    console.log(dates);
+    setAvailability(dates);
+  };
+
+  const submitForm = () => {
+    const budgetValue = budget * BUDGET_INCREMENT;
+
+    const payload = {
+      availability,
+      budget: budgetValue,
+      choiceIds: choices,
+    };
+
+    axios
+      .post("/api/groups/" + inviteToken + "/responses", payload)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
   };
 
   const monthDisplayCheck = () => {
@@ -37,7 +72,7 @@ export default function Form({ inviteToken }: FormProps) {
       axios
         .get("/api/groups/" + inviteToken)
         .then((res) => {
-          setHolidayPoll(res.data);
+          setHolidayForm(res.data);
         })
         .catch((err) => {
           router.push("/");
@@ -62,17 +97,17 @@ export default function Form({ inviteToken }: FormProps) {
       <div className="flex flex-col gap-4 w-full">
         <div className="border-1 border-neutral-300 rounded-sm shadow-xs">
           <h2 className="p-4 border-b-1 border-neutral-300 text-2xl">
-            {holidayPoll?.title}
+            {holidayForm?.title}
           </h2>
 
-          <h3 className={"p-4 " + (!holidayPoll && "hidden")}>
-            {holidayPoll?.description}
+          <h3 className={"p-4 " + (!holidayForm && "hidden")}>
+            {holidayForm?.description}
           </h3>
         </div>
         <div
           className={
             "p-2 border-1 border-neutral-300 rounded-sm shadow-xs" +
-            (!holidayPoll?.availabiltiyTracker && " hidden")
+            (!holidayForm?.availabilityTracker && " hidden")
           }
         >
           <DayPicker
@@ -81,25 +116,28 @@ export default function Form({ inviteToken }: FormProps) {
             mode="multiple"
             navLayout="around"
             numberOfMonths={monthDisplay}
+            selected={availability}
+            disabled={{ before: new Date() }}
+            onSelect={handleDateUpdate}
           />
         </div>
 
         <BudgetSlider
-          isActive={!holidayPoll?.budgetTracker}
+          isActive={!holidayForm?.budgetTracker}
           value={budget}
           increment={BUDGET_INCREMENT}
           maxIncMultiple={MAXIMUM_INCRAMENT_MULTIPLE}
           onSlide={handleSliderChange}
         />
 
-        {holidayPoll?.polls.map((poll, index) => (
-          <PollInput key={index} poll={poll} />
+        {holidayForm?.polls.map((poll, index) => (
+          <PollInput key={index} poll={poll} onUpdate={handlePollUpdate} />
         ))}
 
         <button
           className="text-md py-1 px-2 bg-brand text-white border-1 rounded-sm border-brand-dark shadow-sm"
           type="button"
-          onClick={() => {}}
+          onClick={() => submitForm()}
         >
           Submit
         </button>

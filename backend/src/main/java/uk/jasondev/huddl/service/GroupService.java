@@ -4,8 +4,10 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +60,7 @@ public class GroupService {
         group.setInviteToken(inviteToken);
         group.setTitle(req.title);
         group.setDescription(req.description);
-        group.setActivityTracker(req.availabiltiyTracker);
+        group.setActivityTracker(req.availabilityTracker);
         group.setBudgetTracker(req.budgetTracker);
         group.setStartDate(req.startDate);
         group.setEndDate(req.endDate);
@@ -92,9 +94,7 @@ public class GroupService {
     }
 
     public void addUserToGroup(String inviteToken) {
-        Group group = groupRepository.findByInviteToken(inviteToken)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "invite token not found"));
-
+        Group group = getGroup(inviteToken);
         User user = getCurrentUser();
 
         if (!group.getUsers().contains(user)) {
@@ -104,9 +104,7 @@ public class GroupService {
     }
 
     public GroupPollResponse getGroupInfo(String inviteToken) {
-        Group group = groupRepository.findByInviteToken(inviteToken)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "invite token not found"));
-
+        Group group = getGroup(inviteToken);
         User user = getCurrentUser();
 
         if (!group.getUsers().contains(user)) {
@@ -118,8 +116,8 @@ public class GroupService {
         List<PollResponse> pollResponses = new ArrayList<>();
 
         for (Poll poll : polls) {
-            List<String> options = poll.getOptions().stream().map(option -> option.getText())
-                    .collect(Collectors.toList());
+            Map<Long, String> options = poll.getOptions().stream()
+                    .collect(Collectors.toMap(option -> option.getId(), option -> option.getText()));
 
             pollResponses.add(new PollResponse(poll.getQuestion(), poll.getIsMultipleChoice(), options));
         }
@@ -136,6 +134,13 @@ public class GroupService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         return user;
+    }
+
+    public Group getGroup(String token) {
+        Group group = groupRepository.findByInviteToken(token)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "invite token not found"));
+
+        return group;
     }
 
     public String generateInviteToken() {

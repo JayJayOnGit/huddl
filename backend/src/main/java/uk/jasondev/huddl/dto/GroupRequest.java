@@ -6,7 +6,7 @@ import java.util.List;
 public class GroupRequest {
     public String title;
     public String description;
-    public boolean availabiltiyTracker;
+    public boolean availabilityTracker;
     public boolean budgetTracker;
     public LocalDate startDate;
     public LocalDate endDate;

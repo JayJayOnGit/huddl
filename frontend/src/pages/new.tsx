@@ -8,7 +8,7 @@ import { Poll } from "@/types";
 export default function CreateGroup() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [availabiltiyTracker, setAvailabiltiyTracker] = useState(false);
+  const [availabilityTracker, setAvailabilityTracker] = useState(false);
   const [budgetTracker, setBudgetTracker] = useState(false);
   const [startDate, setStartDate] = useState<string | null>(null);
   const [endDate, setEndDate] = useState<string | null>(null);
@@ -52,7 +52,7 @@ export default function CreateGroup() {
       p.options = p.options.filter((option) => option.trim() !== "");
     }
 
-    if (availabiltiyTracker) {
+    if (availabilityTracker) {
       setStartDate(null);
       setEndDate(null);
     }
@@ -60,7 +60,7 @@ export default function CreateGroup() {
     const payload = {
       title,
       description,
-      availabiltiyTracker,
+      availabilityTracker,
       budgetTracker,
       startDate,
       endDate,
@@ -84,7 +84,7 @@ export default function CreateGroup() {
       if (!validatePoll(poll)) return false;
     }
 
-    if (!availabiltiyTracker) {
+    if (!availabilityTracker) {
       if (endDate == null || startDate == null) return false;
 
       if (new Date(startDate) > new Date(endDate)) return false;
@@ -129,7 +129,7 @@ export default function CreateGroup() {
               <label className="toggle-button h-12 shadow-xs">
                 <input
                   type="checkbox"
-                  onChange={(e) => setAvailabiltiyTracker(e.target.checked)}
+                  onChange={(e) => setAvailabilityTracker(e.target.checked)}
                 />
                 <span className="toggle">Availability Tracker</span>
               </label>
@@ -146,9 +146,10 @@ export default function CreateGroup() {
             <div
               className={
                 "w-full grid grid-cols-2 p-2 border-t-1 border-neutral-300 " +
-                (availabiltiyTracker && "hidden")
+                (availabilityTracker && "hidden")
               }
             >
+              // TODO: Update to Day Picker type=range
               <div className="px-4 flex justify-between items-center gap-4 border-r-1 border-neutral-300">
                 <label className="text-neutral-500 max-sm:hidden">Depart</label>
                 <input

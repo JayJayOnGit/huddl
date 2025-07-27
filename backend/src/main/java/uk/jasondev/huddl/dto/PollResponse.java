@@ -1,13 +1,13 @@
 package uk.jasondev.huddl.dto;
 
-import java.util.List;
+import java.util.Map;
 
 public class PollResponse {
     private String question;
     private boolean isMultipleChoice;
-    private List<String> options;
+    private Map<Long, String> options;
 
-    public PollResponse(String question, boolean isMultipleChoice, List<String> options) {
+    public PollResponse(String question, boolean isMultipleChoice, Map<Long, String> options) {
         this.question = question;
         this.isMultipleChoice = isMultipleChoice;
         this.options = options;
@@ -21,7 +21,7 @@ public class PollResponse {
         return isMultipleChoice;
     }
 
-    public List<String> getOptions() {
+    public Map<Long, String> getOptions() {
         return options;
     }
 }
