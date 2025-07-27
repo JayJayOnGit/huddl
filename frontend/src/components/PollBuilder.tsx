@@ -58,24 +58,27 @@ export default function PollBuilder({
 
   return (
     <div>
-      <div className="flex justify-between gap-4">
-        <img
-          className="h-6 m-auto opacity-50 hover:opacity-100 cursor cursor-pointer"
-          src="/icons/delete.png"
-          onClick={() => onRemove(pollIndex)}
-        />
-        <input
-          className="flex-grow w-0 p-2 border-b-1 border-neutral-300"
-          type="text"
-          placeholder="Question"
-          value={question}
-          onChange={(e) => {
-            const newPoll = { ...poll, question: e.target.value };
-            setPoll(newPoll);
-            onUpdate(pollIndex, newPoll);
-          }}
-        />
-        <label className="flex p-2 gap-2 border-1 border-neutral-300 rounded-sm whitespace-nowrap">
+      <div className="flex max-sm:flex-col justify-between gap-4">
+        <div className="flex w-full gap-4">
+          <img
+            className="h-6 m-auto opacity-50 hover:opacity-100 cursor cursor-pointer"
+            src="/icons/delete.png"
+            onClick={() => onRemove(pollIndex)}
+          />
+          <input
+            className="flex-grow h-fit w-full p-2 border-b-1 border-neutral-300"
+            type="text"
+            placeholder="Question"
+            value={question}
+            onChange={(e) => {
+              const newPoll = { ...poll, question: e.target.value };
+              setPoll(newPoll);
+              onUpdate(pollIndex, newPoll);
+            }}
+          />
+        </div>
+
+        <label className="flex p-2 gap-2 w-fit border-1 border-neutral-300 rounded-sm whitespace-nowrap">
           <input
             className="accent-brand-dark"
             type="checkbox"

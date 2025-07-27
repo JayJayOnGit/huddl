@@ -39,7 +39,6 @@ export default function Form({ inviteToken }: FormProps) {
   };
 
   const handleDateUpdate = (dates: Date[] | undefined) => {
-    console.log(dates);
     setAvailability(dates);
   };
 

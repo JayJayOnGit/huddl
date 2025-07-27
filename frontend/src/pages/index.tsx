@@ -28,10 +28,10 @@ export default function Home() {
       <div className="w-full h-full">
         <Header states={[]} onStateChance={() => {}} />
         <div className="h-full max-w-[1280px] px-4 mx-auto">
-          <div className="flex justify-between my-4 items-center">
-            <h2 className="text-xl">All Your Holidays</h2>
+          <div className="flex justify-between my-3 items-center">
+            <h2 className="text-xl font-bold">All Your Holidays</h2>
             <button
-              className="text-md py-1 px-2 bg-brand text-white border-1 rounded-sm border-brand-dark shadow-sm"
+              className="text-md py-1 px-2 bg-brand hover:bg-brand-dark text-white border-1 rounded-sm border-brand-dark shadow-sm cursor-pointer"
               type="button"
               onClick={() => router.push("/new")}
             >

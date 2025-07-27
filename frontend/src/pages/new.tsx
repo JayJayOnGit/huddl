@@ -109,7 +109,8 @@ export default function CreateGroup() {
       <div className="w-full h-full">
         <Header states={[]} onStateChance={() => {}} />
         <div className="h-full max-w-[720px] px-4 mx-auto">
-          <div className="flex flex-col mt-8 mb-4 border-1 border-neutral-300 rounded-md shadow-2xs">
+          <h2 className="my-4 text-xl font-bold">Plan New Holiday</h2>
+          <div className="flex flex-col mb-4 border-1 border-neutral-300 rounded-md shadow-2xs">
             <input
               className="text-xl w-full p-4 border-b-1 border-neutral-300"
               type="text"
@@ -119,27 +120,29 @@ export default function CreateGroup() {
             />
 
             <textarea
-              className="text-md w-full p-4 border-b-1 border-neutral-300 text-wrap"
+              className="text-md h-auto w-full p-4 border-b-1 border-neutral-300 text-wrap"
               placeholder="Holiday description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
 
             <div className="w-full grid grid-cols-2 p-4 gap-4">
-              <label className="toggle-button h-12 shadow-xs">
+              <label className="toggle-button h-12 shadow-xs cursor-pointer">
                 <input
                   type="checkbox"
                   onChange={(e) => setAvailabilityTracker(e.target.checked)}
                 />
-                <span className="toggle">Availability Tracker</span>
+                <span className="toggle max-sm:text-sm">
+                  Availability Tracker
+                </span>
               </label>
 
-              <label className="toggle-button h-12 shadow-xs">
+              <label className="toggle-button h-12 shadow-xs cursor-pointer">
                 <input
                   type="checkbox"
                   onChange={(e) => setBudgetTracker(e.target.checked)}
                 />
-                <span className="toggle">Budget Tracker</span>
+                <span className="toggle max-sm:text-sm">Budget Tracker</span>
               </label>
             </div>
 
@@ -149,7 +152,6 @@ export default function CreateGroup() {
                 (availabilityTracker && "hidden")
               }
             >
-              // TODO: Update to Day Picker type=range
               <div className="px-4 flex justify-between items-center gap-4 border-r-1 border-neutral-300">
                 <label className="text-neutral-500 max-sm:hidden">Depart</label>
                 <input
@@ -183,7 +185,7 @@ export default function CreateGroup() {
 
             <div className="p-2 border-t-1 border-neutral-300">
               <button
-                className="w-full p-2 border-1 border-neutral-300 rounded-sm shadow-xs"
+                className="w-full p-2 border-1 border-neutral-300 hover:border-brand rounded-sm shadow-xs cursor-pointer"
                 onClick={addPoll}
               >
                 Add Poll
@@ -192,7 +194,7 @@ export default function CreateGroup() {
           </div>
 
           <button
-            className="text-md py-1 px-2 bg-brand text-white border-1 rounded-sm border-brand-dark shadow-sm float-right"
+            className="text-md py-1 px-2 bg-brand hover:bg-brand-dark text-white border-1 rounded-sm border-brand-dark shadow-sm float-right cursor-pointer"
             type="button"
             onClick={() => createGroup()}
           >

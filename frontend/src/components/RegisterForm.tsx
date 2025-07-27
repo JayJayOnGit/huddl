@@ -43,7 +43,7 @@ export default function LoginForm() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button
-          className="bg-brand text-white font-bold px-4 py-2 border-1 border-brand-dark rounded-sm shadow-xs hover:shadow-md hover:bg-brand-dark"
+          className="bg-brand text-white font-bold px-4 py-2 border-1 border-brand-dark rounded-sm shadow-xs hover:shadow-md hover:bg-brand-dark cursor-pointer"
           type="submit"
         >
           Register

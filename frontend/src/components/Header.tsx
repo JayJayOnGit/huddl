@@ -56,7 +56,7 @@ export default function Header({ states, onStateChance }: HeaderProps) {
       <div
         className={
           "absolute w-full bg-white shadow-sm flex flex-col min-md:hidden " +
-          (menuOpen ? "translate-y-0" : "opacity-0 translate-y-[-100%]")
+          (menuOpen ? "translate-y-0" : "translate-y-[-100%]")
         }
       >
         {states.map((state, index) => (

@@ -27,8 +27,8 @@ export default function HolidayPreview({
       </div>
       <div className="flex gap-x-2">
         <p>{"Location, City"}</p>
-        <p>|</p>
-        <p className="text-brand-dark">
+        <p className={" " + (!startDate && "hidden")}>|</p>
+        <p className={"text-brand-dark " + (!startDate && "hidden")}>
           {(startDate && format(startDate, "d MMM")) +
             " - " +
             (endDate && format(endDate, "d MMM"))}
