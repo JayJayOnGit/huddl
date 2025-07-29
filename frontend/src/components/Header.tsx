@@ -19,7 +19,7 @@ export default function Header({ states, onStateChance }: HeaderProps) {
 
   return (
     <div>
-      <header className="relative z-10 flex w-full h-12 px-4 items-center border-b-1 bg-white border-neutral-200 shadow-xs">
+      <header className="relative z-10 flex w-full h-12 px-4 items-center border-b-1 bg-white border-neutral-200">
         <div className="flex justify-between w-full max-w-[1440px] mx-auto">
           <div className="flex gap-12 items-center">
             <h1
