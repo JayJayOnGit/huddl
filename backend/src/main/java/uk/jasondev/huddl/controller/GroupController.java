@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import uk.jasondev.huddl.dto.GroupPollResponse;
 import uk.jasondev.huddl.dto.GroupPreviewResponse;
-import uk.jasondev.huddl.dto.GroupRequest;
+import uk.jasondev.huddl.dto.GroupCreationRequest;
+import uk.jasondev.huddl.dto.GroupCreationResponse;
 import uk.jasondev.huddl.dto.SubmissionRequest;
 import uk.jasondev.huddl.service.GroupService;
 import uk.jasondev.huddl.service.SubmissionsService;
@@ -30,9 +31,9 @@ public class GroupController {
     private SubmissionsService submissionsService;
 
     @PostMapping
-    public ResponseEntity<?> createGroup(@RequestBody GroupRequest req) {
-        groupService.createGroup(req);
-        return ResponseEntity.ok("no way it worked");
+    public ResponseEntity<GroupCreationResponse> createGroup(@RequestBody GroupCreationRequest req) {
+        String token = groupService.createGroup(req);
+        return ResponseEntity.ok(new GroupCreationResponse(token));
     }
 
     @GetMapping

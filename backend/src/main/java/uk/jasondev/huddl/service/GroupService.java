@@ -19,7 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 import jakarta.transaction.Transactional;
 import uk.jasondev.huddl.dto.GroupPollResponse;
 import uk.jasondev.huddl.dto.GroupPreviewResponse;
-import uk.jasondev.huddl.dto.GroupRequest;
+import uk.jasondev.huddl.dto.GroupCreationRequest;
 import uk.jasondev.huddl.dto.PollRequest;
 import uk.jasondev.huddl.dto.PollResponse;
 import uk.jasondev.huddl.model.Group;
@@ -52,7 +52,7 @@ public class GroupService {
     }
 
     @Transactional
-    public void createGroup(GroupRequest req) {
+    public String createGroup(GroupCreationRequest req) {
         Group group = new Group();
         String inviteToken = generateInviteToken();
 
@@ -90,6 +90,8 @@ public class GroupService {
         }
 
         groupRepository.save(group);
+
+        return inviteToken;
     }
 
     public void addUserToGroup(String inviteToken) {

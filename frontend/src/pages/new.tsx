@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import PollBuilder from "@/components/PollBuilder";
 import { Poll } from "@/types";
+import router from "next/router";
 
 export default function CreateGroup() {
   const [title, setTitle] = useState("");
@@ -70,7 +71,7 @@ export default function CreateGroup() {
     axios
       .post("/api/groups", payload)
       .then((res) => {
-        console.log(res.data);
+        router.replace("/group/" + res.data.token);
       })
       .catch((err) => {
         console.error(err.response);

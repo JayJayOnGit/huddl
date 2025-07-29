@@ -3,7 +3,7 @@ package uk.jasondev.huddl.dto;
 import java.time.LocalDate;
 import java.util.List;
 
-public class GroupRequest {
+public class GroupCreationRequest {
     public String title;
     public String description;
     public boolean availabilityTracker;
