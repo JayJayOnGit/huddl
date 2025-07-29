@@ -8,24 +8,26 @@ import AuthRequired from "@/components/AuthRequired";
 
 export default function Group() {
   const router = useRouter();
-  const group = router.query.group as string;
-
-  const [state, setState] = useState("form");
+  const { group, view } = router.query;
 
   const handleStateChange = (state: string) => {
-    setState(state);
+    router.push("/group/" + group + "?view=" + state, undefined, {
+      shallow: true,
+    });
   };
 
   const renderPage = () => {
-    switch (state) {
-      case "form":
-        return group ? <Form inviteToken={group} /> : <div></div>;
-      case "results":
-        return <FormResults />;
-      case "plan":
-        return <Plan />;
-      default:
-        return <Plan />;
+    if (group) {
+      switch (view) {
+        case "form":
+          return <Form inviteToken={group as string} />;
+        case "results":
+          return <FormResults inviteToken={group as string} />;
+        case "plan":
+          return <Plan />;
+        default:
+          return <div></div>;
+      }
     }
   };
 
