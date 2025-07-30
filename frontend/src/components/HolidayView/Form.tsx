@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { DayEventHandler, DayPicker } from "react-day-picker";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import "react-day-picker/style.css";
 import BudgetSlider from "@/components/BudgetSlider";
 import PollInput from "@/components/HolidayView/PollInput";
@@ -66,6 +68,7 @@ export default function Form({ inviteToken }: FormProps) {
     return window.innerWidth < 768 ? 1 : 2;
   };
 
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (inviteToken) {
       axios
@@ -75,7 +78,8 @@ export default function Form({ inviteToken }: FormProps) {
         })
         .catch((err) => {
           router.push("/");
-        });
+        })
+        .finally(() => setLoading(false));
     }
   }, [inviteToken]);
 
@@ -86,6 +90,16 @@ export default function Form({ inviteToken }: FormProps) {
       setMonthDisplay(monthDisplayCheck());
     });
   }, []);
+
+  if (loading)
+    return (
+      <div className="flex flex-col py-4 gap-4 h-full max-w-[720px] px-4 pb-4 mx-auto">
+        <Skeleton height={32} />
+        <Skeleton height={72} />
+        <Skeleton height={64} />
+        <Skeleton height={54} />
+      </div>
+    );
 
   return (
     <div className="h-full max-w-[720px] px-4 pb-4 mx-auto">
