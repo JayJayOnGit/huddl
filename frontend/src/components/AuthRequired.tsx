@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
+import { UserProvider } from "@/contexts/UserContext";
 
 export default function AuthRequired({
   children,
@@ -9,7 +10,7 @@ export default function AuthRequired({
   children: React.ReactNode;
 }) {
   const router = useRouter();
-
+  const [loading, setLoading] = useState(true);
   const isTokenExpired = (token: string) => {
     try {
       const decoded = jwtDecode(token);
@@ -26,11 +27,14 @@ export default function AuthRequired({
     const token = localStorage.getItem("token");
 
     if (!token || isTokenExpired(token)) {
-      router.push("/auth/login");
+      router.replace("/auth/login");
     } else {
       axios.defaults.headers.common = { Authorization: "Bearer " + token };
+      setLoading(false);
     }
   }, []);
 
-  return <>{children}</>;
+  if (loading) return <div></div>;
+
+  return <UserProvider>{children}</UserProvider>;
 }

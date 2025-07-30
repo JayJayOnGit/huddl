@@ -16,7 +16,7 @@ export default function HolidayPreview({
     <div
       className="flex flex-col gap-y-2 p-3 rounded-sm border-1 border-neutral-200 shadow-xs hover:border-brand hover:shadow-sm transition-all cursor-pointer"
       onClick={() => {
-        router.push("/group/" + token);
+        router.push("/group/" + token + "?view=form");
       }}
     >
       <div className="flex justify-between">
