@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { JetBrains_Mono } from "next/font/google";
+import "@/lib/chartSetup";
 
 const font = JetBrains_Mono({ subsets: ["latin"] });
 
