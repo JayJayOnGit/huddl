@@ -16,21 +16,6 @@ export default function Group() {
     });
   };
 
-  const renderPage = () => {
-    if (group) {
-      switch (view) {
-        case "form":
-          return <Form inviteToken={group as string} />;
-        case "results":
-          return <FormResults inviteToken={group as string} />;
-        case "plan":
-          return <Plan />;
-        default:
-          return <div></div>;
-      }
-    }
-  };
-
   return (
     <AuthRequired>
       <h1>
@@ -38,7 +23,9 @@ export default function Group() {
           states={["Form", "Results", "Plan"]}
           onStateChance={(e) => handleStateChange(e)}
         />
-        {renderPage()}
+        {view == "form" && <Form inviteToken={group as string} />}
+        {view == "results" && <FormResults inviteToken={group as string} />}
+        {view == "plan" && <Plan />}
       </h1>
     </AuthRequired>
   );
