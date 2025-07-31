@@ -3,7 +3,7 @@ import { DayEventHandler, DayPicker } from "react-day-picker";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import "react-day-picker/style.css";
-import BudgetSlider from "@/components/BudgetSlider";
+import BudgetSlider from "@/components/HolidayView/BudgetSlider";
 import PollInput from "@/components/HolidayView/PollInput";
 import axios from "axios";
 import { HolidayForm } from "@/types";

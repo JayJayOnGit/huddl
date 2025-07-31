@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
-import LoginForm from "@/components/LoginForm";
-import RegisterForm from "@/components/RegisterForm";
+import LoginForm from "@/components/AuthView/LoginForm";
+import RegisterForm from "@/components/AuthView/RegisterForm";
 
 export default function Auth() {
   const router = useRouter();
