@@ -59,8 +59,8 @@ export default function Header({ states, onStateChance }: HeaderProps) {
             {/** user menu*/}
             <div
               className={
-                "z-50 absolute right-4 top-8 text-sm text-nowrap text-neutral-600 min-w-64 bg-white border-1 border-neutral-300 rounded-sm shadow-sm flex flex-col " +
-                (userstateMenuOpen ? "" : "scale-80 opacity-0")
+                "absolute right-4 top-8 text-sm text-nowrap text-neutral-600 min-w-64 bg-white border-1 border-neutral-300 rounded-sm shadow-sm flex flex-col " +
+                (userstateMenuOpen ? "" : "z-0 translate-y-[-150%] opacity-50")
               }
             >
               <div className="p-2 border-b-1 border-neutral-300">
