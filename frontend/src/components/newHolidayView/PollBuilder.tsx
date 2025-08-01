@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PollOption from "@/components/NewHolidayView/PollOption";
+import PollOption from "@/components/newHolidayView/PollOption";
 import { Poll } from "@/types";
 
 type PollBuilderProps = {

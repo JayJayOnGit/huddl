@@ -1,5 +1,5 @@
 import InviteLink from "@/components/InviteLink";
-import ChartDisplay from "@/components/HolidayView/ChartDisplay";
+import ChartDisplay from "@/components/holidayView/ChartDisplay";
 
 type FormResultsProps = {
   inviteToken: string;
