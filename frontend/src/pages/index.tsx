@@ -1,6 +1,6 @@
 import AuthRequired from "@/components/AuthRequired";
 import Header from "@/components/Header";
-import HolidayPreviewList from "@/components/HomeView/HolidayPreviewList";
+import HolidayPreviewList from "@/components/homeView/HolidayPreviewList";
 import { Preview } from "@/types";
 import "react-loading-skeleton/dist/skeleton.css";
 
