@@ -1,9 +1,9 @@
-import Form from "@/components/HolidayView/Form";
+import Form from "@/components/holidayView/Form";
 import Header from "@/components/Header";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import FormResults from "@/components/HolidayView/FormResults";
-import Plan from "@/components/HolidayView/Plan";
+import FormResults from "@/components/holidayView/FormResults";
+import Plan from "@/components/holidayView/Plan";
 import AuthRequired from "@/components/AuthRequired";
 
 export default function Group() {

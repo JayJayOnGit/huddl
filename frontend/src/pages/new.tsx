@@ -2,7 +2,7 @@ import AuthRequired from "@/components/AuthRequired";
 import Header from "@/components/Header";
 import { useState } from "react";
 import axios from "axios";
-import PollBuilder from "@/components/PollBuilder";
+import PollBuilder from "@/components/newHolidayView/PollBuilder";
 import { Poll } from "@/types";
 import router from "next/router";
 
