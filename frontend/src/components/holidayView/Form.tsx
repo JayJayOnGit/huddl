@@ -93,7 +93,7 @@ export default function Form({ inviteToken }: FormProps) {
 
   if (loading)
     return (
-      <div className="flex flex-col py-4 gap-4 h-full max-w-[720px] px-4 pb-4 mx-auto">
+      <div className="flex flex-col gap-4 h-full max-w-[720px] px-4 pb-12 mt-4 mx-auto">
         <Skeleton height={32} />
         <Skeleton height={72} />
         <Skeleton height={64} />
@@ -102,7 +102,7 @@ export default function Form({ inviteToken }: FormProps) {
     );
 
   return (
-    <div className="h-full max-w-[720px] px-4 pb-4 mx-auto">
+    <div className="h-full max-w-[720px] px-4 pb-12 mx-auto">
       <div className="flex justify-between my-4 items-center">
         <h2 className="text-xl font-bold">Holiday Form</h2>
         <InviteLink token={inviteToken} />
